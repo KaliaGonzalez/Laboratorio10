@@ -17,15 +17,19 @@ public class Main {
             imprimir(textoClaro);
             KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITMO); 
             SecretKey llave = keyGenerator.generateKey(); 
+            long tiempoInicio = System.nanoTime();
             byte[] textoCifrado = CifradoSimetrico.cifrar(llave, texto);
             System.out.println("\n El texto cifrado es: ");
             imprimir(textoCifrado); 
             byte[] textoDes = CifradoSimetrico.decifrar(llave, textoCifrado); 
+            long tiempoFin = System.nanoTime(); 
             System.out.println("\n El texto decifrado es: ");
             imprimir(textoClaro); 
+            long tiempo = (tiempoFin - tiempoInicio);
             //Convertirmos el texto claro a String 
             String textoClaroString = new String(textoDes); 
             System.out.println("\n El texto claro es: " + textoClaroString);
+            System.out.println("\n El tiempo  es: " + tiempo + " nanosegundos");
         scanner.close(); }
         catch (Exception e){
             System.out.println("Error: " + e.getMessage());
